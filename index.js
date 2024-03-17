@@ -1,23 +1,31 @@
 const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
 
 // Create the first Express app
-const app1 = express();
+const app = express();
+const port = process.env.PORT || 3000;
 
-app1.get('/api1', (req, res) => {
+// Create an HTTP server
+const server = http.createServer(app);
+
+// Attach Socket.IO to the HTTP server
+const io = socketIo(server);
+
+app.get('/api1', (req, res) => {
   res.send('This is the response from the first Express server');
 });
 
-app1.listen(3000, () => {
-  console.log('First Express server listening on port 3000');
+// Socket.IO event handlers
+io.on('connection', (socket) => {
+  console.log('WebSocket client connected');
+  socket.on('message', (message) => {
+    console.log('Received message:', message);
+    socket.emit('message', 'Hello from WebSocket server!');
+  });
 });
 
-// Create the second Express app
-const app2 = express();
-
-app2.get('/api2', (req, res) => {
-  res.send('This is the response from the second Express server');
-});
-
-app2.listen(4000, () => {
-  console.log('Second Express server listening on port 4000');
+// Start the HTTP server
+server.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
