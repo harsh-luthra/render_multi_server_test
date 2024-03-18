@@ -12,6 +12,8 @@ const server = http.createServer(app);
 // Attach Socket.IO to the HTTP server
 const io = socketIo(server);
 
+app.use(express.json());
+
 app.get('/api1', (req, res) => {
   res.send('This is the response from the first Express server');
 });
