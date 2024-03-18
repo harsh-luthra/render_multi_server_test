@@ -16,6 +16,17 @@ app.get('/api1', (req, res) => {
   res.send('This is the response from the first Express server');
 });
 
+app.post('/dataS', (req, res) => {
+	const data_ = req.body.data;
+  console.log('Received message:', data_);
+	io.emit('sms_got',data_);
+  //bot.sendMessage(groupIdSS, data_).then(() => {})
+  //.catch((error) => {
+  //    console.log("ERROR",error);
+  //});
+	res.status(200).send('Done!');
+});
+
 // Socket.IO event handlers
 io.on('connection', (socket) => {
   console.log('WebSocket client connected');
