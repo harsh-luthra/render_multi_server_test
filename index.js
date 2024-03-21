@@ -17,6 +17,8 @@ const port = process.env.PORT || 3000;
 // Create an HTTP server
 const server = http.createServer(app);
 
+app.use(express.json());
+
 // Attach Socket.IO to the HTTP server
 const io = socketIo(server);
 
