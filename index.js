@@ -5,6 +5,7 @@ const bot = new TelegramBot(token, { polling: false });
 const groupIdCC = 'ADD CC GROUP ID HERE';
 const groupIdSS = 'ADD SS GROUP ID HERE';
 
+const cors = require('cors');
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
@@ -13,6 +14,7 @@ const socketIo = require('socket.io');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
 
 // Create an HTTP server
